@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    ​
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    ​
+    <!-- Appender to log to file in a JSON format -->
+    <appender name="mySplunk" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+        <url>http://localhost:8000</url>
+        <index>INDEXAME</index>
+        <token>eyJraWQiOiJzcGx1bmsuc2VjcmV0IiwiYWxnIjoiSFM1MTIiLCJ2ZXIiOiJ2MiIsInR0eXAiOiJzdGF0aWMifQ.eyJpc3MiOiJhZG1pbiBmcm9tIENIVU1BTiIsInN1YiI6ImFkbWluIiwiYXVkIjoiZGV2IiwiaWRwIjoiU3BsdW5rIiwianRpIjoiYzFkMDZiMGE0ZTk2NjM1ODBjZTczZDZhODFjYTk4NzY3ODVjYzQyNzljOTAzZGNhYzlhYWNkY2Q3ZDA5YzE1YSIsImlhdCI6MTY0ODQwODAzNiwiZXhwIjoxNjQ4NDgwMDM2LCJuYnIiOjE2NDg0MDgwMzZ9.Gtqp2itY591RcrqUhRYL_IF5yiwIIbVPi8PN5_EJfFG9Um9nyUKte1p9w9RqsrksD7KBrTYQrzrfgP--klnxuA</token>
+        <batch_size_count>10</batch_size_count>
+        <disableCertificateValidation>true</disableCertificateValidation>
+    </appender>
+
+<logger name="com.chuman" level="info" additivity="false">
+<appender-ref ref="mySplunk"/>
+</logger>
+</configuration>
